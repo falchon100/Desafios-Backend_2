@@ -15,7 +15,7 @@ alert('agregado correctamente')
 }
 
 // Función para eliminar un producto
-function deleteProduct(productId) {
+function deleteProduct(productId, user) {
   const url = `/api/carts/${user}/product/${productId}`;
   fetch(url, {
     method: 'DELETE',

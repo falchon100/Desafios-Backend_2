@@ -32,7 +32,7 @@
         <div class="col my-3">
             <div class="card mx-auto" style="width: 18rem;">
                   <a href="#" onclick="addToCart('{{_id}}', '{{../cart}}')" class="btn btn-primary">Comprar</a>
-        <a href="#" onclick="deleteProduct('{{_id}}')" class="btn btn-danger">Eliminar</a>
+         <a href="#" onclick="deleteProduct('{{_id}}','{{../cart}}')" class="btn btn-danger">Eliminar</a>
                 <img src={{this.thumbnails}} class="card-img-top" alt={{this.id}}>
                 <div class="card-body">
                     <h5 class="card-title">{{this.title}}</h5>
