@@ -29,9 +29,22 @@ export const generateOrder = async(req,res)=>{
     // El carrito no se encontró o está vacío
     return res.status(404).json({ error: 'Carrito no encontrado' });
   }
+    //validar que cada uno de los productos que tengo en carrito tengan stock
+
+    // si no tiene stock , deja el producto en el carrito 
+
+    //  array de productos que no pudo comprar los mando al update de carrito
+
+    // array de productos que pudo comprar   
+  
+
     const totalSum = carrito[0].carts.reduce((accumulator, currentValue) => { //sumo las cantidades del array de carrito y multiplico por cantidad
       return accumulator + currentValue.products.price * currentValue.quantity;
     }, 0);
+
+
+    
+
   let products = {
     code: crypto.randomUUID(),
     purchase_datetime: new Date(),
@@ -39,6 +52,7 @@ export const generateOrder = async(req,res)=>{
     purchaser: req.user//email del usuario
 }
   await ticketDao.createTicket(products)
+
   res.status(200).send({status:'se creo correctamente'})
 }
 

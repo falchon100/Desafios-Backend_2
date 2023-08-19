@@ -64,6 +64,8 @@ export const postLogin_Ctrl =  async (req, res) => {
         req.session.user=req.user.email;
         res.redirect('/products')
     }else{
+        let user =await userDao.getByEmail(req.user.email)   // leo el usuario y guardo el carrito y el mail
+        req.session.cart= user.cart;
         req.session.user = req.user.email;
       res.redirect('/products')
     }

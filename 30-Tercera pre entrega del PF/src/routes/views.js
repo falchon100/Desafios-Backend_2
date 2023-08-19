@@ -15,7 +15,7 @@ views.get("/realtimeproducts",realTimeProducts_Ctrl);
 // SOLO EL USUARIO PEUDE ENVIAR MENSAJES AL CHAT
 views.get("/chat",requiereAuth,chat_Ctrl);
 views.get("/products",requireLogin,product_Ctrl);
-views.get(`/carts/:cid`,cardId_Ctrl)
+views.get("/carts/:cid",cardId_Ctrl)
 
 
 export default views;

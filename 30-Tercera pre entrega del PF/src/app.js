@@ -21,7 +21,8 @@ const PORT = config.port || 8081;
 const server = app.listen(PORT, () => console.log("creando servidor en http://localhost:"+PORT));
 // io sera el servidor para trabajar con socket
 const io = new Server(server);
-
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 // configuracion de session y mongoStore
 app.use(session({
   store: MongoStore.create({
@@ -37,8 +38,7 @@ initializePassport(); //inicializo passport
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cookieParser());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+
 
 //establezco los endpoints de los Routers
 app.use("/api/products", productsRouter);

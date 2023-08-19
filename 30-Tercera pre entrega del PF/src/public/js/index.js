@@ -52,3 +52,4 @@ document.getElementById("boton").addEventListener("click", () => {
     thumbnails,
   });
 });
+

@@ -78,11 +78,9 @@ passport.use('github',new GithubStrategy({
 
 
 passport.serializeUser((user,done)=>{
-    console.log("serializeUser", user);
     done(null,user.email)
 });
 passport.deserializeUser(async(id,done)=>{
-    console.log("deserializeUser", id);
     let user = await userDao.getById(id);
     done(null,user)
 })

@@ -12,6 +12,7 @@
                         <p class="card-text">Cantidad: {{this.quantity}}</p>
                         <p class="card-text text-muted "> {{this.products.description}}</p>
                         <p class="card-text "> {{this.products.category}}</p>
+                     <button class="btn btn-success mb-3" onclick="purchase('{{cart._id}}')">Comprar</button>
                     <button class="btn btn-danger mb-3" onclick="deleteProduct('{{_id}}, '{{this.product._id}}')">Quitar del carrito</button>
                     </div>
             </div>
