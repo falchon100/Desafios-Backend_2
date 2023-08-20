@@ -1,0 +1,3 @@
+const generateOrder =()=>{
+    alert('hola')
+  }

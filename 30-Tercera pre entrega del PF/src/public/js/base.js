@@ -28,3 +28,4 @@ function deleteProduct(productId, user) {
     console.error('Error:', error);
   });
 }
+

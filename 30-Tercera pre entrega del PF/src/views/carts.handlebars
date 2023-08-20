@@ -1,5 +1,4 @@
 <h1>Carrito de compras</h1>
-
 <div class="container">
     <div class="row " >
         <p class="card-text text-center">Detalle del carrito: {{cart._id}}</p>
@@ -12,11 +11,35 @@
                     <p class="card-text">Cantidad: {{this.quantity}}</p>
                     <p class="card-text text-muted "> {{this.products.description}}</p>
                     <p class="card-text "> {{this.products.category}}</p>
-                    <a href="#" onclick="deleteProduct('{{_id}}', '{{../user}}')" class="btn btn-danger">Eliminar</a>
+                    <a href="#" onclick="deleteProduct('{{this.products._id}}', '{{../cart._id}}')" class="mb-3 btn btn-danger">Eliminar</a>
                 </div>
             </div>
         </div>
         {{/each}}
-        <a class="btn btn-primary " href="http://localhost:8080/products">volver a productos</a>
+        <a class="btn btn-primary mb-3 " href="http://localhost:8080/products">volver a productos</a>
+        <a href="#" onclick="generateOrder()" class="btn btn-success">Realizar Compra</a>
     </div>
 </div>
+
+<script src="js/base.js"></script>
+<script src="js/prueba.js"></script>
+{{!-- <script>
+    // Función para eliminar un producto
+function deleteProduct(productId, cartid) {
+  const url = `/api/carts/${cartid}/product/${productId.id}`;
+  fetch(url, {
+    method: 'DELETE',
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log(data); // Manejar la respuesta del servidor
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+}
+
+const generateOrder =()=>{
+  alert('hola')
+}
+</script> --}}
