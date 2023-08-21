@@ -29,3 +29,18 @@ function deleteProduct(productId, user) {
   });
 }
 
+const socket =io();
+
+function generateOrder(cid,user) {
+  console.log(cid);
+  console.log('USUARIO'+ " "+user);
+  socket.emit("generateOrder", cid,user)
+}
+
+socket.on("orderGenerated", (result) => {
+  if (result.success) {
+    alert("Orden generada exitosamente");
+  } else {
+    alert("Error al generar la orden");
+  }
+});

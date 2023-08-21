@@ -92,6 +92,31 @@ io.on("connection", async (socket) => {
       data.thumbnails
     );
   });
+
+  socket.on("generateOrder", async (cid,user) => {
+    try {
+      const response = await fetch(`http://localhost:8080/api/carts/${cid}/purchase`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body:JSON.stringify({ user }) 
+      });
+  
+      if (response.ok) {
+        // Orden generada exitosamente
+        socket.emit("orderGenerated", { success: true });
+      } else {
+        // Error al generar la orden
+        socket.emit("orderGenerated", { success: false });
+      }
+    } catch (error) {
+      console.log(error);
+      socket.emit("orderGenerated", { success: false });
+    }
+  });
+
+
 });
 
 // 

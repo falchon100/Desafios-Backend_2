@@ -57,7 +57,8 @@ export const generateOrder = async (req, res) => {
         code: crypto.randomUUID(),
         purchase_datetime: new Date(),
         amount: totalSum,
-        purchaser: req.user//email del usuario
+        purchaser: req.body.user//email del usuario
+    
       };
       await ticketDao.createTicket(ticketData);
 

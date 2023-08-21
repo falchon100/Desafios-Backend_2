@@ -68,6 +68,9 @@ export const cardId_Ctrl =  async(req, res) => {
     try {
         let id = req.params.cid;
         const cart = await cartDao.getCartsById(id);
+        if (cart.length===0){
+          return res.json({status:'failed',msg:'no se encontro carrito'})
+        }
         res.render("carts", { cart: JSON.parse(JSON.stringify(cart[0]))});
     } catch (error) {
         console.log(error);
