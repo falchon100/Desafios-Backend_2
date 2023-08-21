@@ -91,6 +91,7 @@ export default class CartsDao {
       );
       // si existe el producto en el carrito y la cantidad es mayor a 1 , voy "eliminado" producto
       if (prodSelected) {
+        console.log(prodSelected);
         if (prodSelected.quantity > 1) {
           prodSelected.quantity--;
           await carritoId.save();
@@ -156,4 +157,18 @@ export default class CartsDao {
       console.log(error);
     }
   }
+
+async resetCart(cid){
+  try {
+    let carritoId = await cartModel.findOne({ _id: cid });
+    carritoId.carts = [];
+    carritoId.save()
+    return carritoId
+  } catch (error) {
+    console.log(error);
+  }
 }
+
+}
+
+

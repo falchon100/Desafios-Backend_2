@@ -5,6 +5,7 @@ import {
   generateOrder,
   getCartsId_Ctrl,
   getCarts_Ctrl,
+  getResetcart,
   postCartsProd_Ctrl,
   postCarts_Ctrl,
   putCartsProd_Ctrl,
@@ -13,7 +14,7 @@ import {
 const cartsRouter = Router();
 
 export default cartsRouter;
-//GETS
+//GETS/* getCartsId_Ctrl */
 cartsRouter.get("/", getCarts_Ctrl);
 cartsRouter.get("/:cid",getCartsId_Ctrl);
 //POST
