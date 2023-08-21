@@ -14,9 +14,12 @@ import passport from "passport";
 import initializePassport from "./config/passport.config.js";
 import config from "./config/config.js";
 import cookieParser from "cookie-parser";
+import CartsDao from "./DAO/CartDao.js";
 
 const app = express();
 const PORT = config.port || 8081;
+
+const cartDao = new CartsDao();
 
 const server = app.listen(PORT, () => console.log("creando servidor en http://localhost:"+PORT));
 // io sera el servidor para trabajar con socket
@@ -116,7 +119,22 @@ io.on("connection", async (socket) => {
     }
   });
 
-
+  socket.on("deleteProduct", async ({ productId, user }) => {
+    try {
+      // Realizar la eliminación del producto del carrito
+      await cartDao.deleteProductToCart(user, productId);
+  
+      // Emitir evento de actualización del carrito
+      socket.emit("cartUpdated");
+  
+      // Emitir mensaje de éxito a quien eliminó el producto
+      socket.emit("productDeleted", { success: true });
+    } catch (error) {
+      console.error(error);
+      // Emitir mensaje de error a quien eliminó el producto
+      socket.emit("productDeleted", { success: false });
+    }
+  });
 });
 
 // 

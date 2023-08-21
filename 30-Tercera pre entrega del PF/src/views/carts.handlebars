@@ -21,26 +21,5 @@
     </div>
 </div>
 
-<script src="js/base.js"></script>
+<script src="/socket.io/socket.io.js"></script>
 <script src="../js/cart.js"></script>
-{{!-- <script>
-    // Función para eliminar un producto
-function deleteProduct(productId, cartid) {
-  const url = `/api/carts/${cartid}/product/${productId.id}`;
-  fetch(url, {
-    method: 'DELETE',
-  })
-  .then(response => response.json())
-  .then(data => {
-    console.log(data); // Manejar la respuesta del servidor
-  })
-  .catch(error => {
-    console.error('Error:', error);
-  });
-}
-
-const generateOrder =()=>{
-  alert('hola')
-}
-</script> --}}
-
