@@ -37,15 +37,24 @@ export const generateOrder = async (req, res) => {
     const productsToProcess = [];
     const productsNotProcessed = [];
 
-    // Verificar el stock de los productos y separarlos en procesados y no procesados
-    for (const product of products) {
-      const existingProduct = await productsDao.getProductById(product.products._id);
-      if (!existingProduct || existingProduct.stock < product.quantity) {
-        productsNotProcessed.push(product.products._id);
-      } else {
-        productsToProcess.push(product);
-      }
+
+   for (const carritoSelect of products) {
+    const product = await productsDao.getProductById(carritoSelect.products._id); //me traigo el producto con el id del carrito seleccionado
+    
+    if (!product.productos) {
+      // Si el producto no existe en la base de datos, lo agregamos a productsNotProcessed
+      productsNotProcessed.push(carritoSelect);
+    } else if (carritoSelect.quantity > product.productos[0].stock) {
+      // Si la cantidad solicitada es mayor que el stock del producto, lo agregamos a productsNotProcessed
+      productsNotProcessed.push(carritoSelect);
+    } else {
+      // Si la cantidad solicitada es menor o igual al stock del producto, lo agregamos a productsToProcess
+      productsToProcess.push(carritoSelect);
     }
+  }
+
+  console.log("productsToProcess", productsToProcess);
+  console.log("productsNotProcessed", productsNotProcessed);
 
     // Calcular el total de la compra
     const totalSum = productsToProcess.reduce((accumulator, currentValue) => {
@@ -59,29 +68,16 @@ export const generateOrder = async (req, res) => {
         purchase_datetime: new Date(),
         amount: totalSum,
         purchaser: req.body.user//email del usuario
-    
       };
       await ticketDao.createTicket(ticketData);
-
-      // Actualizar el stock de los productos y eliminarlos del carrito
-      for (const product of productsToProcess) {
-        await productsDao.updateProduct(product.products._id, -product.quantity);
-        await cartDao.deleteProductToCart(cid, product.products._id);
-      }
     }
-
-    // Actualizar el carrito con los productos no procesados
-    if (productsNotProcessed.length > 0) {
-      await cartDao.updateCart(cid, { carts: productsNotProcessed });
-    } else {
-      await cartDao.deleteCart(cid);
-    }
-
     res.status(200).json({ status: 'Compra generada con éxito' });
   } catch (error) {
     res.status(500).json({ error: 'Error al generar la compra' });
   }
 };
+
+//////////////////////////////////////////////////////////
 
   export const postCarts_Ctrl =  async (req, res) => {
     await cartDao.addCarts()

@@ -36,7 +36,6 @@ export default class CartsDao {
 
   async addProductToCart(cid, pid) {
       //valido si existe producto
-      console.log('aca se hace el addProductToCart de backend');
       let products = await productAll.getProducts();
       let productId = products.find((prod) => prod.id == pid);
       if (!productId) {
