@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
     age: Number,
     cart:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:"carts"
+        ref:"carts",
     },
     role:{type:String,
     default:'user'}

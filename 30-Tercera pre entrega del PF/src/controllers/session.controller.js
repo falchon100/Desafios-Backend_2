@@ -37,6 +37,7 @@ export const getGithub_Ctrl = async (req,res)=>{}
 
 export const getGithubCallback_Ctrl = async (req,res)=>{
     req.session.user = req.user.email;
+    req.session.cart = req.user.cart;
     res.redirect('/products');
 }
 

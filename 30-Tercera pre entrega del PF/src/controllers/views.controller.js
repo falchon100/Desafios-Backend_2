@@ -22,8 +22,7 @@ export const product_Ctrl =  async (req, res) => {
     const sort = req.query.sort;
     const user = req.session.user;
     const admin = req.session.admin;
-    const cart = req.session.cart
-    console.log(cart);
+    const cart = req.session.cart  
     // Genero opcciones de paginacion para poder ordenar por precio , y ademas le paso los querys 
     const options = {
       page: page, 
