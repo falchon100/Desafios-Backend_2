@@ -66,11 +66,12 @@ export const product_Ctrl =  async (req, res) => {
 export const cardId_Ctrl =  async(req, res) => {
     try {
         let id = req.params.cid;
+        const user = req.session.user;
         const cart = await cartDao.getCartsById(id);
         if (cart.length===0){
           return res.json({status:'failed',msg:'no se encontro carrito'})
         }
-        res.render("carts", { cart: JSON.parse(JSON.stringify(cart[0]))});
+        res.render("carts", { cart: JSON.parse(JSON.stringify(cart[0])),user});
     } catch (error) {
         console.log(error);
     }

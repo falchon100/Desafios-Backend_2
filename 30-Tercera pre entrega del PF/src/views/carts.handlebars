@@ -18,7 +18,7 @@
         </div>
         {{/each}}
         <a class="btn btn-primary mb-3 " href="http://localhost:8080/products">volver a productos</a>
-        <a href="#" onclick="generateOrder()" class="btn btn-success">Realizar Compra</a>
+        <a href="#" onclick="generateOrder('{{cart._id}}','{{user}}')" class="btn btn-success">Realizar Compra</a>
     </div>
 </div>
 
