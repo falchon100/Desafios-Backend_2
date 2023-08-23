@@ -35,6 +35,7 @@ function generateOrder(cid,user) {
 socket.on("orderGenerated", (result) => {
   if (result.success) {
     alert("Orden generada exitosamente");
+    location.reload();
   } else {
     alert("Error al generar la orden");
   }
