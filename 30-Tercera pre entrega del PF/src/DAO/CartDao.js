@@ -72,6 +72,7 @@ export default class CartsDao {
       //Valido si existe el producto
       let products = await productAll.getProducts();
       let productId = products.find((prod) => prod.id == pid);
+      /* console.log('LOGEO EL PRODUCTO ENCONTRADO          '+productId); */
       if (!productId) {
         return { status: "no existe ese producto" };
       }
@@ -82,15 +83,18 @@ export default class CartsDao {
       }
       // busco en el carrito seleccionado el producto seleccionado
       let prodSelected = carritoId.carts.find(
-        (product) => product.products == pid
-      );
+        (product) => product.products.equals(pid) 
+      )
+      console.log("prodSelected        "+prodSelected);
+      ;
       // busco en el carrito seleccionado el indice del producto seleccionado
       let prodindex = carritoId.carts.findIndex(
-        (product) => product.products == pid
-      );
+        (product) => product.products.equals(pid)
+      )
+
       // si existe el producto en el carrito y la cantidad es mayor a 1 , voy "eliminado" producto
       if (prodSelected) {
-        console.log(prodSelected);
+       
         if (prodSelected.quantity > 1) {
           prodSelected.quantity--;
           await carritoId.save();

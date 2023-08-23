@@ -40,7 +40,7 @@ class ProductDao {
   async getProductById(id) {
     try {
       let productos = await productModel.find({ _id: id });
-      return { status: "Exitoso", productos };
+      return productos 
     } catch (error) {
       return { status: "No se encontro el producto" };
     }

@@ -33,23 +33,25 @@ export const generateOrder = async (req, res) => {
       return res.status(404).json({ error: 'Carrito no encontrado' });
     }
 
-    const products = cart[0].carts;
+    const Cart = cart[0].carts;
     const productsToProcess = [];
     const productsNotProcessed = [];
 
 
-   for (const carritoSelect of products) {
-    const product = await productsDao.getProductById(carritoSelect.products._id); //me traigo el producto con el id del carrito seleccionado
-    
-    if (!product.productos) {
+   for (const producto of Cart) {
+    const product = await productsDao.getProductById(producto.products._id); //me traigo el producto con el id del carrito seleccionado
+    if (!product) {
       // Si el producto no existe en la base de datos, lo agregamos a productsNotProcessed
-      productsNotProcessed.push(carritoSelect);
-    } else if (carritoSelect.quantity > product.productos[0].stock) {
+      productsNotProcessed.push(producto);
+    } else if (producto.quantity > product[0].stock) {
       // Si la cantidad solicitada es mayor que el stock del producto, lo agregamos a productsNotProcessed
-      productsNotProcessed.push(carritoSelect);
+      productsNotProcessed.push(producto);
     } else {
       // Si la cantidad solicitada es menor o igual al stock del producto, lo agregamos a productsToProcess
-      productsToProcess.push(carritoSelect);
+      productsToProcess.push(producto);
+    product[0].stock-=producto.quantity 
+    product[0].save()
+    await cartDao.deleteProductToCart(cid,producto.products._id)
     }
   }
 
