@@ -28,19 +28,23 @@ export const getProductId_Ctrl =  async (req, res) => {
 
 //POST
 export const postProduct_Ctrl = async (req, res) => {
-    let { title, description, code, price, stock, category, thumbnails } =
-      req.body;
-    res.send(
-      await productDao.addProduct(
-        title,
-        description,
-        code,
-        price,
-        stock,
-        category,
-        thumbnails
-      )
-    );
+    let { title, description, code, price, stock, category, thumbnails } =req.body;
+    if (!title||!description||!code||!price||!stock||!category){
+
+      //ACA MANDO EL ERROR
+    }else{
+      res.send(
+        await productDao.addProduct(
+          title,
+          description,
+          code,
+          price,
+          stock,
+          category,
+          thumbnails
+        )
+      );
+    }
   }
 //UPDATE
 export const PutProduct_Ctrl =  async (req, res) => {
