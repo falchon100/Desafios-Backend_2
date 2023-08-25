@@ -16,17 +16,19 @@ import config from "./config/config.js";
 import cookieParser from "cookie-parser";
 import CartsDao from "./DAO/CartDao.js";
 import mockRouter from "./routes/mock.js";
+import errorHandler from './middleware/errors/errors.js'
 
 const app = express();
 const PORT = config.port || 8081;
 
 const cartDao = new CartsDao();
-
 const server = app.listen(PORT, () => console.log("creando servidor en http://localhost:"+PORT));
 // io sera el servidor para trabajar con socket
 const io = new Server(server);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(errorHandler)
+
 // configuracion de session y mongoStore
 app.use(session({
   store: MongoStore.create({

@@ -1,4 +1,8 @@
 import ProductDao from "../DAO/ProductDao.js";
+import CustomError from "../services/errors/customError.js";
+import EErrors from "../services/errors/enums.js";
+import { generateUserErrorInfo } from "../services/errors/info.js";
+
 
 const productDao = new ProductDao();
 
@@ -30,22 +34,19 @@ export const getProductId_Ctrl =  async (req, res) => {
 export const postProduct_Ctrl = async (req, res) => {
     let { title, description, code, price, stock, category, thumbnails } =req.body;
     if (!title||!description||!code||!price||!stock||!category){
-
+      CustomError.createError({
+        name:`Error al registrar producto`,
+        cause: generateUserErrorInfo({title, description, code, price, stock, category}),
+        message: 'Error al intentar registrar un producto',
+        code: EErrors.INVALID_TYPES
+      })
       //ACA MANDO EL ERROR
     }else{
-      res.send(
-        await productDao.addProduct(
-          title,
-          description,
-          code,
-          price,
-          stock,
-          category,
-          thumbnails
-        )
-      );
+        const response =  await productDao.addProduct(title,description,code,price,stock,category,thumbnails);
+          res.send({status:'success',payload:response})
     }
   }
+  
 //UPDATE
 export const PutProduct_Ctrl =  async (req, res) => {
     let producto = req.body;
@@ -69,3 +70,7 @@ export const DeleteProduct_Ctrl =  async (req, res) => {
       res.status(200).send(response);
     }
   }
+
+
+
+  

@@ -1,4 +1,4 @@
-const EErrors={
+const EErrors = {
     INVALID_TYPES:1
 }
 
