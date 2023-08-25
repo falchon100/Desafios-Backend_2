@@ -1,4 +1,4 @@
-export  const generateUserErrorInfo = prod =>{
+export  const generateProductErrorInfo = prod =>{
     let prodInfo = `uno o mas parametros no son validos
     -title :necesita recibir un String, recibio ${prod.first_name}
     -descrption: necesita recibir un String, Recibio: ${prod.last_name}
