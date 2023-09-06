@@ -19,30 +19,6 @@ views.get("/products",requireLogin,product_Ctrl);
 views.get("/carts/:cid",cardId_Ctrl)
 
 
-// PRUEBA EMAIL 
-views.get('/mail',async(req,res)=>{
-  let email = req.query.email
-  let options = {
-    from: 'test email <ovnicrofordz@gmail.com>',
-    to: email,
-    subject: 'Correo de prueba ',
-    html:`<div>
-    <h1>Bienvenido </h1>
-    <p>si usted necesita cambiar el password clickee el siguiente link:</p>
-    <p>http://localhost:8080/password</p>
-    </div>`
-
-  }
-let result = await sendMail(options)
-  console.log(result);
-  res.send(result)
-})
-
-
-views.get('/password',(req,res)=>{
-  res.render('password')
-})
-
 // TEST DE LOGGER
 views.get('/loggerTest',(req,res)=>{
   req.logger.warn('este es un mensaje de tipo warn de')

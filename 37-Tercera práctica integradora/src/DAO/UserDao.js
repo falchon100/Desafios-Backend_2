@@ -1,3 +1,4 @@
+import { createHash } from "../utils/utils.js";
 import CartsDao from "./CartDao.js";
 import { userModel } from "./model/user.model.js";
 
@@ -55,6 +56,19 @@ async getById(id){
     return result;
 }
 
+
+async updateUser(email,newEmail){
+    let result;
+    try {
+        result = await userModel.findOne({ email })
+        result.email=  createHash(newEmail);
+        result.save();
+    } catch (error) {
+       return {status:'error',message:'No se encontro ese email registrado'}
+    }
+    return result; 
+}
+  
 }
 
 

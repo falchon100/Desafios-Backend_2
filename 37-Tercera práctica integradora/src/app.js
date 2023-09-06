@@ -19,6 +19,7 @@ import mockRouter from "./routes/mock.js";
 import errorHandler from './middleware/errors/errors.js'
 import winston from 'winston'
 import { addLogger, logger } from "./utils/logger.js";
+import emailRouter from "./routes/email.js";
 
 const app = express();
 const PORT = config.port || 8081;
@@ -54,6 +55,7 @@ app.use(cookieParser());
 app.use("/mockingproducts",mockRouter)
 app.use("/api/products", productsRouter);
 app.use("/api/carts", cartsRouter);
+app.use("/api/email",emailRouter);
 
 //configuro handlebars
 app.engine("handlebars", handlebars.engine());
