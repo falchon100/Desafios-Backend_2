@@ -6,7 +6,6 @@ import {
   chat_Ctrl,
   product_Ctrl,
   realTimeProducts_Ctrl } from "../controllers/views.controller.js";
-import { sendMail } from "../services/errors/email.js";
 
 const views = Router();
 
