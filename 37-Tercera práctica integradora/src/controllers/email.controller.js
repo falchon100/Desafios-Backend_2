@@ -24,16 +24,15 @@ export const changeEmail= async(req,res)=>{
 
 
 export const sendEmail = async(req,res)=>{
-  let email = req.query.email
+  let email = req.body.email;
   let options = {
     from: 'test email <ovnicrofordz@gmail.com>',
     to: email,
-    subject: 'Correo de prueba ',
+    subject: 'Cambio de contraseña',
     html:`<div>
     <h1>Has solicitado un cambio de contraseña</h1>
     <p>si usted necesita cambiar el password clickee el siguiente link:</p>
     <a href="http://localhost:8080/api/email/password" class="btn btn-danger btn-lg btn-block">Nueva Contraseña</a>
-    <p>http://localhost:8080/password</p>
     </div>`
 
   }

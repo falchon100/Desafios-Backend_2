@@ -5,14 +5,16 @@ import { changeEmail,
 const emailRouter = Router();
 
 
+
+
+emailRouter.post('/',changeEmail) //Ruta para cambio de contraseña
+emailRouter.post('/mail',sendEmail) //Ruta Post para envio de Email
+emailRouter.get('/sendEmail',(req,res)=>{
+    res.render('sendEmail')  //ruta get para renderizar pagina de envio de mail
+})
 emailRouter.get('/password',(req,res)=>{
-    res.render('password')
+    res.render('password') //Ruta get para renderizar cambio contraseña
 
 })
-
-emailRouter.post('/',changeEmail)
-emailRouter.get('/mail',sendEmail)
-
-
 
 export default emailRouter;
