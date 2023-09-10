@@ -1,5 +1,6 @@
 import UserDao from "../DAO/UserDao.js";
 import { sendMail } from "../services/errors/email.js";
+import { generateEmailToken } from "../utils/jwt.js";
 import { createHash, isValidPassword } from "../utils/utils.js";
 
 
@@ -25,6 +26,7 @@ export const changeEmail= async(req,res)=>{
 
 export const sendEmail = async(req,res)=>{
   let email = req.body.email;
+  const emailToken = generateEmailToken({email:email})
   let options = {
     from: 'test email <ovnicrofordz@gmail.com>',
     to: email,
@@ -32,11 +34,23 @@ export const sendEmail = async(req,res)=>{
     html:`<div>
     <h1>Has solicitado un cambio de contraseña</h1>
     <p>si usted necesita cambiar el password clickee el siguiente link:</p>
-    <a href="http://localhost:8080/api/email/password" class="btn btn-danger btn-lg btn-block">Nueva Contraseña</a>
+    <a href="http://localhost:8080/api/email/password?token=${emailToken}">Nueva Contraseña</a>
     </div>`
 
   }
 let result = await sendMail(options)
   console.log(result);
   res.send(result)
+}
+
+
+
+
+
+export const renderPassword = async(req,res)=>{
+  res.render('password')
+}
+
+export const sendEmail_ctrl = async (req,res)=>{
+  res.render('sendEmail')
 }

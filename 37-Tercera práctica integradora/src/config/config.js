@@ -12,5 +12,6 @@ export default {
     ADMIN_PASSWORD : process.env.ADMIN_PASSWORD,
     ENV : process.env.ENV,
     GMAIL_USER : process.env.GMAIL_USER,
-    GMAIL_PASSWORD : process.env.GMAIL_PASSWORD
+    GMAIL_PASSWORD : process.env.GMAIL_PASSWORD,
+    JWT_SECRET :process.env.JWT_SECRET
 }

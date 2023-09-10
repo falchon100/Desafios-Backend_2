@@ -16,8 +16,7 @@ import config from "./config/config.js";
 import cookieParser from "cookie-parser";
 import CartsDao from "./DAO/CartDao.js";
 import mockRouter from "./routes/mock.js";
-import errorHandler from './middleware/errors/errors.js'
-import winston from 'winston'
+import errorHandler from './middleware/errors/errors.js';
 import { addLogger, logger } from "./utils/logger.js";
 import emailRouter from "./routes/email.js";
 

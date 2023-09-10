@@ -1,6 +1,10 @@
 import { Router } from "express";
 import { changeEmail,
-        sendEmail } from "../controllers/email.controller.js";
+        renderPassword,
+        sendEmail, 
+        sendEmail_ctrl
+       } from "../controllers/email.controller.js";
+import { verifyTokenMiddleware } from "../utils/jwt.js";
 
 const emailRouter = Router();
 
@@ -9,12 +13,9 @@ const emailRouter = Router();
 
 emailRouter.post('/',changeEmail) //Ruta para cambio de contraseña
 emailRouter.post('/mail',sendEmail) //Ruta Post para envio de Email
-emailRouter.get('/sendEmail',(req,res)=>{
-    res.render('sendEmail')  //ruta get para renderizar pagina de envio de mail
-})
-emailRouter.get('/password',(req,res)=>{
-    res.render('password') //Ruta get para renderizar cambio contraseña
+emailRouter.get('/sendEmail',sendEmail_ctrl) //Ruta renderizar vista envio email
+emailRouter.get('/password',verifyTokenMiddleware, renderPassword);
 
-})
+
 
 export default emailRouter;

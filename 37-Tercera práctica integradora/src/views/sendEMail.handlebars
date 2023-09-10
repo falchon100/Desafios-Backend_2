@@ -12,9 +12,10 @@
     <div class="card mt-5">
       <div class="card-header">
         <h4 class="text-center">Cambiar contraseña por Email</h4>
-        <p>recibira un correo con el link para poder realizar el cambio de contraseña</p>
+        <p class="text-center">Recibirá un correo con el link para poder realizar el cambio de contraseña</p>
       </div>
-      {{mesage}}
+      <p class="text-center mt-3"> {{message}}</p>
+  
         <form action="/api/email/mail" method="POST">
               <div class="card-body">
         <div class="d-flex flex-column w-25 mx-auto">
