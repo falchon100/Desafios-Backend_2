@@ -78,7 +78,27 @@ export const DeleteProduct_Ctrl =  async (req, res) => {
       res.status(200).send(response);
     }
   }
+/*   export const DeleteProduct_Ctrl = async (req, res) => {
+    const productId = req.params.pid;
+    const user = req.session.user; // Obtener el correo electrónico o ID del usuario actual
+  
 
+      const product = await productDao.getProductById(productId);
+  
+      if (!product) {
+        return res.status(404).json({ error: 'Producto no encontrado' });
+      }
+  
+      // Verificar si el usuario actual es el propietario del producto
+      if (product.owner === user || req.session.admin) {
+        // El usuario es el propietario o es un administrador, puede eliminar el producto
+        const response = await productDao.deleteProduct(productId);
+        return res.status(200).json(response);
+      } else {
+        return res.status(403).json({ error: 'No tienes permiso para eliminar este producto' });
+      }
+
+  }; */
 //
 
   

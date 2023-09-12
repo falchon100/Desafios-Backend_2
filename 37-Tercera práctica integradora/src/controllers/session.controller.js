@@ -18,7 +18,7 @@ export const getLogin_Ctrl = async (req, res) => {
 }
 
 export const getLoginError_Ctrl =  async (req, res) => {
-    res.render('login-error',{});
+    res.render('login-error',{message:'El usuario o contraseña no son correctos'});
 }
 
 export const getProfile_Ctrl =  async (req, res) => {

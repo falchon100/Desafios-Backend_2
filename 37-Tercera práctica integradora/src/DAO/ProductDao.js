@@ -17,7 +17,8 @@ class ProductDao {
     price,
     stock,
     category,
-    thumbnails
+    thumbnails,
+    owner
   ) {
     let producto;
     try {
@@ -30,6 +31,7 @@ class ProductDao {
         stock,
         category,
         thumbnails,
+        owner
       });
     } catch (error) {
       console.log(error);
