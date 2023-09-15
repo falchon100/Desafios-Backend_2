@@ -60,6 +60,7 @@ class ProductDao {
     let producto;
     try {
       producto = await productModel.updateOne({ _id: id }, properties);
+      return {status:"Success", msg:`Su product ID: ${id}, fue modificado`}
     } catch (error) {
       console.log(error);
     }

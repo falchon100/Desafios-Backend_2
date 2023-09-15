@@ -15,6 +15,28 @@ paths:
                   $ref: '#components/schemas/Product'
         "500":
           description: Error interno del servidor
+    post:
+      summary: agrega producto a la base de datos
+      tags:
+        - Products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#components/requestBodies/productInput"
+      responses:
+        "201":
+          description: Producto creado exitosamente 
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/product'
+        "400":
+          description: Error al intentar registrar un producto
+
+              
+
   /api/products/{pid}:
     get:
       summary: Obtiene el producto en base al pid recibido
@@ -39,20 +61,51 @@ paths:
     put:
       summary: Actualiza el producto de la base de datos
       tags:
-        -Products
+        - Products
       parameters:
-        - name: pid
-          in: path
-          required: true
-          description: id del producto a actualizar 
-          schema:
-            type: String
+      - name: pid
+        in: path
+        required: true
+        description: id del producto a actualizar 
+        schema:
+          $type: String
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: "#components/requestBodies/productInput"
+      responses:
+       "200":
+          description: Producto actualizado exitosamente
+          content:
+           application/json:
+             schema:
+                $ref: '#components/schemas/Product'
+       "500":
+         description: Error interno del servidor
+    delete:
+      summary: Elimina el producto de la base de datos
+      tags:
+        - Products
+      parameters:
+      - name: pid
+        in: path
+        required: true
+        description: id del producto a eliminar
+        schema:
+          $type: String
+      responses: 
+        "200":
+          description: Producto eliminado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/Product'
+        "500":
+          description: Error interno del servidor
+
+              
 
 components:
   schemas:
@@ -98,7 +151,7 @@ components:
         owned: admin
   requestBodies:
     productInput:
-      type: Object
+      type: object
       properties:
         title:
           type: String

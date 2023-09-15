@@ -20,7 +20,7 @@ export const requireAuthAdmin = (req,res,next)=>{
     if (req.session.admin){
         next();
     }else{
-        res.json({status:"failed",msg:"solo el admin puede modificar productos"})
+        res.status(400).json({status:"failed",msg:"solo el admin puede modificar productos"})
     }
 }
 
