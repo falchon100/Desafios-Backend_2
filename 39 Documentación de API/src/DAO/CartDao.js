@@ -71,8 +71,7 @@ export default class CartsDao {
     try {
       //Valido si existe el producto
       let products = await productAll.getProducts();
-      let productId = products.find((prod) => prod.id == pid);
-      /* console.log('LOGEO EL PRODUCTO ENCONTRADO          '+productId); */
+      let productId = products.find((prod) => prod._id == pid);
       if (!productId) {
         return { status: "no existe ese producto" };
       }

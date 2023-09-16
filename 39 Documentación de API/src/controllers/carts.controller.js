@@ -90,7 +90,7 @@ export const generateOrder = async (req, res) => {
           let cartId = req.params.cid;
           let productId = req.params.pid;
           const response = await cartDao.addProductToCart(cartId, productId)
-          res.send(response)
+          res.status(200).send({status:'success',msg:'se agrego correctamente'})
         } catch (error) {
           res.status(404).send({ error: 'El carrito no existe' });
         }
@@ -111,7 +111,6 @@ export const deleteCartsProd_Ctrl =  async (req, res) => {
     if (response!== "no existe ese producto"){
       res.status(200).send({status:`Se borro correctamente una cantidad del producto ${productId}`}  )
     }
-   console.log('borrado');
   }
 
 //UPDATE
