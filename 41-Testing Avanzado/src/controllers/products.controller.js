@@ -11,7 +11,6 @@ const productDao = new ProductDao();
 export const getProduct_Ctrl =  async (req, res) => {
     const { limit } = req.query;
     const productos = await productDao.getProducts();
-    console.log(productos);
     limit ? res.send(productos.slice(0, limit)) : res.status(200).send(productos);
   }
 
@@ -19,7 +18,6 @@ export const getProductId_Ctrl =  async (req, res) => {
     try {
       const id = req.params.pid;
       const response = await productDao.getProductById(id);
-      console.log(response);
       if (!response) {
         return res.status(400).send({status:'failed',payload:'no se encontro el producto ingresado'})
       } else {

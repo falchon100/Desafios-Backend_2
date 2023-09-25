@@ -18,7 +18,6 @@ export default class CartsDao {
   async getCartsById(id) {
     // SI NO EXISTE EL PRODUCTO LO MANDO COMO ERROR Y SINO ENVIO EL PRODUCTO ENCONTRADO
       let cart = await cartModel.find({ _id: id });
-      console.log("===D    +" +cart);
       if (!cart){
         throw new Error( 'no existe el carrito')
       }else{

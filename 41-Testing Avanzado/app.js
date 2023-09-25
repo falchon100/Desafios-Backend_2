@@ -22,10 +22,12 @@ import emailRouter from "./src/routes/email.js";
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUiExpress from 'swagger-ui-express';
 import { swaggerOptions } from "./src/utils/swagger-options.js";
+import cors from "cors"
 
 const app = express();
 const PORT = config.port || 8081;
 app.use(addLogger)
+app.use(cors())
 
 const cartDao = new CartsDao();
 const server = app.listen(PORT, () => logger.info("creando servidor en http://localhost:"+PORT));
@@ -160,3 +162,5 @@ app.use('/api/sessions', sessionRouter)
 //inicializo la clase
 const productos = new ProductManager();
 const Messages = new MessageDao();
+
+export default app
