@@ -2,7 +2,9 @@
     
     <link rel="stylesheet" href="/css/base.css">
     <div class="container">
-
+                    {{#if status }}
+                                <div class="alert alert-danger" role="alert">{{status}}</div>
+                    {{/if}}  
         <div class="row justify-content-center mt-4">
             <div class="col-md-6">
                 <div class="card p-4">
