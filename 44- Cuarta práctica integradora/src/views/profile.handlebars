@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tarjeta de perfil</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container">
+     <h2 class="text-center">{{status}}</h2>
+    <div class="card mt-5">
+      <div class="card-header">
+        <h4>Perfil de usuario</h4>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">
+            <p><strong>Nombre: {{user.first_name}} </strong> <span id="nombre"></span></p>
+          </div>
+          <div class="col-md-6">
+            <p><strong>Apellido: {{user.last_name}} </strong> <span id="apellido"></span></p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p><strong>Email: {{user.email}}</strong> <span id="email"></span></p>
+          </div>
+          <div class="col-md-6">
+            <p><strong>Edad: {{user.age}}</strong> <span id="edad"></span></p>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-md-6">
+             <a href="/products" class="btn btn-primary btn-lg btn-block">Volver</a>
+          </div>
+          <div class="col-md-6">
+             <a href="/api/sessions/logout" class="btn btn-danger btn-lg btn-block">Deslogear</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <form class="container p-5 text-center border border-light-subtle mt-5" enctype="multipart/form-data" action="http://localhost:8080/api/users/{{user.email}}/documents" method="post">
+  <h2>Subir archivos</h2>
+  <label for="profileImage"> Imagen de perfil</label>
+  <input  type="file" name="profileImage"> <!-- Para imágenes de perfil -->
+  <br>
+  <!-- O -->
+  <label for="productImage">Imagen para producto</label>
+  <input type="file" name="productImage"> <!-- Para imágenes de producto -->
+  <br>
+  <!-- O -->
+  <label for="image">Para cargar documentos</label>
+
+  <input type="file" name="image"> <!-- Para documentos (usará la carpeta predeterminada) -->
+  <br>
+  <input class="btn btn-success" type="submit" value="Subir archivo">
+</form>
+</body>
+</html>
