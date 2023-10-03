@@ -31,7 +31,7 @@ export const getLogout_Ctrl = async(req, res) => {
     // antes de destruir la session actualizo la propiedad last conection
     if (req.session.user) {
         const user = await userDao.getByEmail(req.session.user);
-        user.last_connection = new Date();
+        user.last_connection = new Date().toString();
         await user.save();
     }
 
@@ -72,14 +72,14 @@ export const postLogin_Ctrl =  async (req, res) => {
         req.session.user=req.user.email;
         //atualizo el last conection al ingresar
         const user = await userDao.getByEmail(req.user.email);
-        user.last_connection = new Date();
+        user.last_connection = new Date().toString();
         await user.save();
         res.redirect('/products')
     }else{
         let user =await userDao.getByEmail(req.user.email)   // leo el usuario y guardo el carrito y el mail
         req.session.cart= user.cart;
         req.session.user = req.user.email;
-        user.last_connection = new Date();
+        user.last_connection = new Date().toString();
         await user.save();
       res.redirect('/products')
     }

@@ -1,9 +1,10 @@
 // VIEW.CONTROLLER.js
 import CartsDao from "../DAO/CartDao.js";
+import UserDao from "../DAO/UserDao.js";
 import { productModel } from "../DAO/model/products.model.js";
 
 const cartDao = new CartsDao();
-
+const userDao = new UserDao()
 export const base_Ctrl = async(req,res)=>{
     res.render("base",{style:'base.css'})
   }
@@ -23,7 +24,10 @@ export const product_Ctrl =  async (req, res) => {
     const sort = req.query.sort;
     const user = req.session.user;
     const admin = req.session.admin;
-    const cart = req.session.cart  
+    const cart = req.session.cart 
+    const userfound= await userDao.getByEmail(user)
+    const role = userfound.role
+   
     // Genero opcciones de paginacion para poder ordenar por precio , y ademas le paso los querys 
     const options = {
       page: page, 
@@ -42,6 +46,7 @@ export const product_Ctrl =  async (req, res) => {
     //guardo los metodos de paginate en data para poder utilizar en la vista
   const data = {
     admin,
+    role:role,
     cart:cart,
     user:user,
     status: 'success',

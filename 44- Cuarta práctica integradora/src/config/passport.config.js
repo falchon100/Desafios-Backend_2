@@ -65,12 +65,12 @@ passport.use('github',new GithubStrategy({
             password: '',
             age: 20,
             role:'user',
-            last_connection: new Date()
+            last_connection: new Date().toString()
         }
         let result = await userDao.createUser(newUser)
         done(null,result) // una vez que tenemos el usuario le mandamos result
     }else{ //si el usuario ya se encuentra registrado 
-        user.last_connection = new Date();
+        user.last_connection = new Date().toString();
         user.save();
         done(null,user) //no vamos a tener error y le pasamos user
       }

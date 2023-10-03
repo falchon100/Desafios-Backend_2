@@ -9,6 +9,8 @@
                     <p>Bienvenido! : <strong>{{user}}</strong>  </p>
                                        <a href="http://localhost:8080/carts/{{cart}}" class="btn btn-success">Ver carrito</a>
                    <p>Numero de carrito: {{cart}} </p>
+                  ROL : <strong>{{role}}</strong> 
+
 {{#if admin}}
  <p>ROL :<strong>ADMINISTRADOR</strong></p> 
 {{else}}
@@ -23,7 +25,9 @@
         </div>
     </div>
 
-
+{{#if msg}}
+se subio correctamente
+{{/if}}
 <div class="container">
      {{!--  <a href="#" onclick="generateOrder('{{cart}}','{{user}}')" class="btn btn-success">Realizar Compra</a> --}}
     <h1 class="text-center">Productos</h1>

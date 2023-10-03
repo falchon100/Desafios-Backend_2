@@ -67,7 +67,7 @@ export const generateOrder = async (req, res) => {
     if (productsToProcess.length > 0) {
       const ticketData = {
         code: crypto.randomUUID(),
-        purchase_datetime: new Date(),
+        purchase_datetime: new Date().toString(),
         amount: totalSum,
         purchaser: req.body.user//email del usuario
       };
