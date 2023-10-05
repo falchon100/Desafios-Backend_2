@@ -62,7 +62,7 @@ export const getCurrent_Ctrl = async(req,res)=>{
 }
 
 export const postRegister_Ctrl =  async (req, res) => {
-    res.render('login')
+    res.render('login',{statusSuccess:'Registrado Correctamente'})
     }
 
 export const postLogin_Ctrl =  async (req, res) => {
