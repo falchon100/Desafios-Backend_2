@@ -18,7 +18,7 @@ const userDao = new UserDao;
   
     user.documents.push(...imageInfoArray); // Agrego los nuevos archivos al arreglo de documentos
     user.save(); //actualizo la db
-    res.redirect('/products')
+   res.render('profile',({user: JSON.parse(JSON.stringify(user)),statusSuccess:'Se agrego correctamente'}))
   }
 
  /*  export const handlePremium = async (req, res) => {

@@ -13,3 +13,6 @@ userRouter.post("/:uid/documents", uploader.any(),updateCtrl);
 
 
 export default userRouter;
+
+
+/* userRouter.post("/:uid/documents", uploader.any(),updateCtrl); */

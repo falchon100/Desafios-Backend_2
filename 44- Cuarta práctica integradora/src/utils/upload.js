@@ -28,6 +28,6 @@ const storage = multer.diskStorage({
     } //ejemplo : "product-1696299477963-foto..jpg"
 });
 
-const uploader = multer({storage});
+const uploader = multer({storage})
 
 export default uploader;
