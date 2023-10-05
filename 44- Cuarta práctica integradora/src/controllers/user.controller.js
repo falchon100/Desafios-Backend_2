@@ -21,7 +21,7 @@ const userDao = new UserDao;
     res.redirect('/products')
   }
 
-  export const handlePremium = async (req, res) => {
+ /*  export const handlePremium = async (req, res) => {
     const uid = req.params.uid;
     let user = await userDao.getByEmail(uid);
     console.log(user.documents);
@@ -38,6 +38,33 @@ const userDao = new UserDao;
       console.error("Error al guardar el usuario:", error);
       res.status(500).json({ error: "Error interno del servidor" });
     }
-  };
+  }; */
 
-  
+ export const handlePremium = async(req, res) => {
+    //Tomo el usuario por pametro sino lo encuentra envio un usuario no encontrado
+    const uid = req.params.uid;
+    let user = await userDao.getByEmail(uid);
+  if(!user){
+    return res.status(400).json({msg:' usuario no encontrado'})
+  }
+    //si el usuario es usuario valido que tenga los 3 documentos
+    if (user.role ==='user'){
+    const identification = user.documents.some(doc=>doc.reference.includes('identification'))
+    const proofOfAddress = user.documents.some(doc=>doc.reference.includes('proofOfAddress'))
+    const accountStatus = user.documents.some(doc=>doc.reference.includes('accountStatus'))
+    //si los tiene procede a cambiar a premium y envio mensaje de success
+    if(identification&&proofOfAddress&&accountStatus){
+      user.role='premium'
+    await  user.save()
+      res.status(200).render('profile',({user: JSON.parse(JSON.stringify(user)),statusSuccess:'Felicidades ahora es Premium'}))
+    }else{
+      //si falta alguno de los documentos envio mensaje de failled
+      res.status(400).render('profile',({user: JSON.parse(JSON.stringify(user)),statusFailled:'Debe cargar Identificación, Comprobante de domicilio y Comprobante de estado de cuenta para actualizar a premium'}))
+    }
+
+  }else{
+    //si el usuario ya es premium y clickea nuevamente envio failled que ya es premium
+    res.status(400).render('profile',{user: JSON.parse(JSON.stringify(user)),statusFailled:'Usted ya es premium!'});
+  }
+   }
+
