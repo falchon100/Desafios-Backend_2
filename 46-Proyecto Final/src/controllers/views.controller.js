@@ -26,9 +26,10 @@ export const product_Ctrl =  async (req, res) => {
     const admin = req.session.admin;
     const cart = req.session.cart 
     const userfound= await userDao.getByEmail(user)
-    const role = userfound.role
-   
+ /*    const role = userfound.role */
+    const role = userfound? userfound.role : 'Admin'
     // Genero opcciones de paginacion para poder ordenar por precio , y ademas le paso los querys 
+    //PRUEBA
     const options = {
       page: page, 
       limit: limit, 

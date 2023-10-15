@@ -7,9 +7,20 @@
                 <div class="card-body">
                     <h5 class="card-title">{{this.title}}</h5>
                     <p>Bienvenido! : <strong>{{user}}</strong>  </p>
-                                       <a href="http://localhost:8080/carts/{{cart}}" class="btn btn-success">Ver carrito</a>
+                                     {{#if admin}}
+                                     <div></div>
+                                     {{else}}
+                                        <a href="http://localhost:8080/carts/{{cart}}" class="btn btn-success">Ver carrito</a>
                    <p>Numero de carrito: {{cart}} </p>
+                                        {{/if}}
+                     
+                                         
+                                    
                   ROL : <strong>{{role}}</strong> 
+{{#if admin}}
+<button class="btn btn-secondary" onclick="location.href='/api/users/setusers'">Administrar usuarios</button>
+{{/if}}
+
 
 {{#if admin}}
  <p>ROL :<strong>ADMINISTRADOR</strong></p> 

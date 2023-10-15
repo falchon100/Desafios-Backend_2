@@ -31,8 +31,10 @@ export const getLogout_Ctrl = async(req, res) => {
     // antes de destruir la session actualizo la propiedad last conection
     if (req.session.user) {
         const user = await userDao.getByEmail(req.session.user);
-        user.last_connection = new Date().toString();
-        await user.save();
+        if(user){
+            user.last_connection = new Date().toString();
+            await user.save();
+        }
     }
 
     req.session.destroy(error => {
@@ -71,9 +73,10 @@ export const postLogin_Ctrl =  async (req, res) => {
         req.session.admin=true;
         req.session.user=req.user.email;
         //atualizo el last conection al ingresar
-        const user = await userDao.getByEmail(req.user.email);
+/*         const user = await userDao.getByEmail(req.user.email);
         user.last_connection = new Date().toString();
-        await user.save();
+        await user.save(); */
+        const user = 'admin'  //PRUEBA
         res.redirect('/products')
     }else{
         let user =await userDao.getByEmail(req.user.email)   // leo el usuario y guardo el carrito y el mail
