@@ -3,6 +3,7 @@ import ProductDao from "../DAO/ProductDao.js";
 import TicketDao from "../DAO/TicketDao.js";
 import crypto from 'node:crypto'
 
+
 const productsDao= new ProductDao;
 const cartDao = new CartsDao;
 const ticketDao = new TicketDao;
@@ -43,15 +44,16 @@ export const generateOrder = async (req, res) => {
     if (!product) {
       // Si el producto no existe en la base de datos, lo agregamos a productsNotProcessed
       productsNotProcessed.push(producto);
-    } else if (producto.quantity > product[0].stock) {
+    } else if (producto.quantity > product.stock) {
       // Si la cantidad solicitada es mayor que el stock del producto, lo agregamos a productsNotProcessed
       productsNotProcessed.push(producto);
     } else {
       // Si la cantidad solicitada es menor o igual al stock del producto, lo agregamos a productsToProcess
       productsToProcess.push(producto);
-    product[0].stock-=producto.quantity 
-    product[0].save()
+    product.stock-=producto.quantity 
+    product.save()
     await cartDao.deleteProductToCart(cid,producto.products._id)
+
     }
   }
 
@@ -75,7 +77,8 @@ export const generateOrder = async (req, res) => {
     }
     res.status(200).json({ status: 'Compra generada con éxito' });
   } catch (error) {
-    res.status(500).json({ error: 'Error al generar la compra' });
+   /*  res.status(500).json({ error: 'Error al generar la compra' }); */
+   console.log(error);
   }
 };
 

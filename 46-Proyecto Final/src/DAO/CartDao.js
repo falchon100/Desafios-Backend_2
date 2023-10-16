@@ -71,7 +71,7 @@ export default class CartsDao {
     try {
       //Valido si existe el producto
       let products = await productAll.getProducts();
-      let productId = products.find((prod) => prod._id == pid);
+      let productId = products.find((prod) => prod._id.equals(pid) );
       if (!productId) {
         return { status: "no existe ese producto" };
       }
