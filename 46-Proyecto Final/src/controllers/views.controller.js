@@ -58,10 +58,10 @@ export const product_Ctrl =  async (req, res) => {
     page: result.page,
     hasPrevPage: result.hasPrevPage, 
     hasNextPage: result.hasNextPage, 
-    prevLink:result.prevLink = result.hasPrevPage?`http://localhost:8080/products?page=${result.prevPage}&limit=${limit}`:'', 
-    nextLink:result.nextLink = result.hasNextPage?`http://localhost:8080/products?page=${result.nextPage}&limit=${limit}`:''
+    prevLink:result.prevLink = result.hasPrevPage?`http://localhost:${process.env.port}/products?page=${result.prevPage}&limit=${limit}`:'', 
+    nextLink:result.nextLink = result.hasNextPage?`http://localhost:${process.env.port}/products?page=${result.nextPage}&limit=${limit}`:''
   }
-  
+ 
   // SI LA PAGINA ES MAYOR A LAS PAGINAS QUE TENGO EN DATA ENVIO ERROR  SINO RENDERIZO LA DATA
   if (page> data.totalPages){
     res.status(500).send('No existe esa cantidad de paginas');

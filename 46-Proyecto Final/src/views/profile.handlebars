@@ -22,7 +22,7 @@
             {{/if}}
       <div class="card-header">
         <h4>Perfil de usuario</h4>
-         <a class="btn btn-success" href="http://localhost:8080/api/users/premium/{{user.email}}">Cambiar a premium</a> 
+         <a class="btn btn-success" href="/api/users/premium/{{user.email}}">Cambiar a premium</a> 
       </div>
       <div class="card-body">
         <div class="row">
@@ -52,7 +52,7 @@
       </div>
     </div>
   </div>
-  <form class="container p-5 text-center border border-light-subtle mt-5" enctype="multipart/form-data" action="http://localhost:8080/api/users/{{user.email}}/documents" method="post">
+  <form class="container p-5 text-center border border-light-subtle mt-5" enctype="multipart/form-data" action="/api/users/{{user.email}}/documents" method="post">
   <h2>Subir archivos</h2>
   <label for="profileImage"> Imagen de perfil</label>
   <input  type="file" name="profileImage"> 

@@ -10,7 +10,7 @@
                                      {{#if admin}}
                                      <div></div>
                                      {{else}}
-                                        <a href="http://localhost:8080/carts/{{cart}}" class="btn btn-success">Ver carrito</a>
+                                        <a href="/carts/{{cart}}" class="btn btn-success">Ver carrito</a>
                    <p>Numero de carrito: {{cart}} </p>
                                         {{/if}}
                      
@@ -28,8 +28,8 @@
  ROL: <strong>USUARIO </strong> 
 {{/if}}
 <div>
- <a href="http://localhost:8080/api/sessions/profile" class="btn btn-primary btn-lg btn-block">Perfil</a>
-                   <a href="http://localhost:8080/api/sessions/logout" class="btn btn-danger btn-lg btn-block ">Deslogear</a>
+ <a href="/api/sessions/profile" class="btn btn-primary btn-lg btn-block">Perfil</a>
+                   <a href="/api/sessions/logout" class="btn btn-danger btn-lg btn-block ">Deslogear</a>
 </div>
                 </div>
             </div>
@@ -54,8 +54,8 @@ se subio correctamente
                     <p class="card-text">{{this.description}}</p>
                     <p class="card-text text-secondary">stock : {{this.stock}}</p>
                     <p class="card-text text-secondary">{{this.category}}</p>
-                                 <a href="#" onclick="addToCart('{{_id}}', '{{../cart}}')" class="btn btn-primary">Comprar</a>
-         <a href="#" onclick="deleteProduct('{{_id}}','{{../cart}}')" class="btn btn-danger">Eliminar</a>
+                    <a href="#" onclick="addToCart('{{_id}}', '{{../cart}}')" class="btn btn-primary">Comprar</a>
+        {{!--  <a href="#" onclick="deleteProduct('{{_id}}','{{../cart}}')" class="btn btn-danger">Eliminar</a> --}}
                 </div>
             </div>
         </div>

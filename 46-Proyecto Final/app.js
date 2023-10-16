@@ -116,7 +116,7 @@ io.on("connection", async (socket) => {
 
   socket.on("generateOrder", async (cid,user) => {
     try {
-      const response = await fetch(`http://localhost:8080/api/carts/${cid}/purchase`, {
+      const response = await fetch(`http://localhost:${process.env.port}/api/carts/${cid}/purchase`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

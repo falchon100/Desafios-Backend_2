@@ -34,7 +34,7 @@ export const sendEmail = async(req,res)=>{
     html:`<div>
     <h1>Has solicitado un cambio de contraseña</h1>
     <p>si usted necesita cambiar el password clickee el siguiente link:</p>
-    <a href="http://localhost:8080/api/email/password?token=${emailToken}">Nueva Contraseña</a>
+    <a href="http://localhost:${process.env.port}/api/email/password?token=${emailToken}">Nueva Contraseña</a>
     </div>`
 
   }

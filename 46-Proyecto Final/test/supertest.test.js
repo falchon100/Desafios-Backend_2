@@ -5,7 +5,7 @@ import session  from 'supertest-session';
 import app from '../app.js'
 
 const expect = chai.expect;
-const requester = supertest("http://localhost:8080");
+const requester = supertest(`http://localhost:${process.env.port}`);
 const testSession = session(app); 
 
 let prodID = "";
