@@ -2,8 +2,9 @@ import CartsDao from "../DAO/CartDao.js";
 import ProductDao from "../DAO/ProductDao.js";
 import TicketDao from "../DAO/TicketDao.js";
 import crypto from 'node:crypto'
+import PaymentService from "../services/payment.js";
 
-
+const paymentService = new PaymentService;
 const productsDao= new ProductDao;
 const cartDao = new CartsDao;
 const ticketDao = new TicketDao;

@@ -1,5 +1,5 @@
 import UserDao from "../DAO/UserDao.js";
-import { sendMail } from "../services/errors/email.js";
+import { sendMail } from "../services/email.js";
 import { generateEmailToken } from "../utils/jwt.js";
 import { createHash, isValidPassword } from "../utils/utils.js";
 

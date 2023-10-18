@@ -16,6 +16,12 @@ const cartsRouter = Router();
 export default cartsRouter;
 //GETS/* getCartsId_Ctrl */
 cartsRouter.get("/", getCarts_Ctrl);
+cartsRouter.get("/success",(req,res)=>{
+  res.send('success')
+})
+cartsRouter.get("/cancel",(req,res)=>{
+  res.send('cancel')
+})
 cartsRouter.get("/:cid",getCartsId_Ctrl);
 //POST
 cartsRouter.post("/",postCarts_Ctrl);

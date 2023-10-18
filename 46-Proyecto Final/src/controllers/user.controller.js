@@ -1,6 +1,6 @@
 import CartsDao from "../DAO/CartDao.js";
 import UserDao from "../DAO/UserDao.js";
-import { sendMail } from "../services/errors/email.js";
+import { sendMail } from "../services/email.js";
 
 const userDao = new UserDao;
 const cartDao = new CartsDao;
@@ -86,10 +86,6 @@ const cartDao = new CartsDao;
      return user.last_connection < dateTwoDays;
     })
 
- /* const mensaje =  userFilterTwoDays.forEach(async(user)=>{
-    userDao.deleteUser(user.email)
-    cartDao.deleteCart(user.cart)
-    }) */
 
     userFilterTwoDays.forEach(async(user)=>{
       const mailOptions = {
