@@ -108,7 +108,6 @@ const cartDao = new CartsDao;
 
   export const setUsers = async (req,res)=>{
     const users = await userDao.getAll();
-    console.log(users);
     res.render('setusers', { users: JSON.parse(JSON.stringify(users)) ,style:"base.css"})
   }
 
