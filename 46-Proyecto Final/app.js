@@ -24,6 +24,7 @@ import swaggerUiExpress from 'swagger-ui-express';
 import { swaggerOptions } from "./src/utils/swagger-options.js";
 import cors from "cors"
 import userRouter from "./src/routes/users.js";
+import UserDao from "./src/DAO/UserDao.js";
 
 const app = express();
 const PORT = config.port || 8081;
@@ -65,12 +66,14 @@ app.use("/api/carts", cartsRouter);
 app.use("/api/email",emailRouter);
 app.use("/api/users",userRouter)
 app.use("/", views);
-
+app.use('/api/sessions', sessionRouter)
 //configuro handlebars
 app.engine("handlebars", handlebars.engine());
 app.set("views", "./src/views");
 app.set("view engine", "handlebars");
 app.use(express.static("./src/public"));
+
+const userdao = new UserDao();
 
 mongoose
   .connect(
@@ -153,12 +156,13 @@ io.on("connection", async (socket) => {
       socket.emit("productDeleted", { success: false });
     }
   });
+
 });
 
-// 
-app.use('/api/sessions', sessionRouter)
 
-// 
+
+
+
 
 
 //inicializo la clase

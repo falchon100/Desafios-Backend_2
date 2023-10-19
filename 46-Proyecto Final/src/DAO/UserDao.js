@@ -70,18 +70,13 @@ async updateUser(email,newEmail){
 }
   
 
-async deleteUser(email){
+async deleteUser(email) {
+    let result = await userModel.deleteOne({email})
+    return result
 
-    await userModel.deleteOne({email});
-    return {status:'Success',message:`el usuario ${email}fue eliminado`}
+  }
+
 }
-
-
-}
-
-
-
-
 
 const cartDao = new CartsDao();
 

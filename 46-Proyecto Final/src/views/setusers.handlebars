@@ -9,13 +9,14 @@
       <p> Rol : <strong>{{role}} </strong>  </p>
       <p>Carrito ID :<strong>{{cart}}</strong>  </p>
       <p>Ultima conexion :<strong> {{last_connection}}</strong></p> 
-           <a class="btn btn-success m-3" onclick="changeUserRole('{{email}}')">Cambiar Rol</a>
+           <a class="btn btn-success m-3" onclick="changeRole('{{email}}')">Cambiar Rol</a>
             <a class="btn btn-danger m-3" onclick="deleteUser('{{email}}')">Eliminar usuario y carrito</a>
   </li>
     {{/each}}
 </ul>
 </div>
 {{/if}}
-
   <button class="btn btn-danger ms-2 my-2" onclick="location.href='/api/sessions/logout'">LOGOUT</button>
     <button class="btn btn-success ms-2 my-2" onclick="location.href='/products'">volver</button>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/admin.js"></script>

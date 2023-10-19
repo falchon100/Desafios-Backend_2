@@ -111,3 +111,46 @@ const cartDao = new CartsDao;
     console.log(users);
     res.render('setusers', { users: JSON.parse(JSON.stringify(users)) ,style:"base.css"})
   }
+
+
+
+  export const changerole = async (req, res) => {
+    const email = req.params.email;
+  
+    try {
+      const usuario = await userDao.getByEmail(email);
+      if (!usuario) {
+        return res.status(404).json({ message: 'Usuario no encontrado' });
+      }
+      if (usuario.role === 'user') {
+        usuario.role = 'premium';
+      } else {
+        usuario.role = 'user';
+      }
+      await usuario.save();
+  
+      return res.status(200).json({ message: 'Rol cambiado con éxito' });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: 'Error al cambiar el rol' });
+    }
+  };
+
+  export const deleteUser = async (req, res) => {
+    const email = req.params.email;
+  
+    try {
+      const response = await userDao.deleteUser(email);
+      console.log(response);
+      if (response.success) {
+        console.log('Usuario eliminado correctamente');
+        res.status(200).json({ message: 'Usuario eliminado correctamente' });
+      } else {
+        console.error('Error al eliminar el usuario');
+        res.status(500).json({ message: 'Error al eliminar el usuario' });
+      }
+    } catch (error) {
+      console.error('Error en deleteUser:', error);
+      res.status(500).json({ message: 'Error al eliminar el usuario' });
+    }
+  };

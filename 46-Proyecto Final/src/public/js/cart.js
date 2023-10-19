@@ -26,3 +26,4 @@ socket.on("orderGenerated", (result) => {
     alert("Error al generar la orden");
   }
 });
+
