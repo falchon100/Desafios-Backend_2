@@ -101,7 +101,11 @@ const cartDao = new CartsDao;
             </div>`
         };
         await sendMail(mailOptions)
+        await cartDao.deleteCart(user.cart)
+        await userDao.deleteUser(user.email)
+
     })
+
     res.json({dateTwoDays,userFilterTwoDays})
   }
 

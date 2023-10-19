@@ -38,3 +38,23 @@ function changeRole(email) {
     });
   }
   
+  function inactiveUser(){
+    fetch(`/api/users`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => {
+      if (response.ok) {
+        alert('usuarios inactivos eliminados')
+        window.location.reload();
+        console.log('Usuarios inactivos eliminados correctamente');
+      } else {
+        console.error('Error al eliminar usuarios inactivos');
+      }
+    })
+    .catch(error => {
+      console.error('Error en la solicitud fetch:', error);
+    });
+  }
