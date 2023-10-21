@@ -11,19 +11,28 @@ function deleteProduct(productId, user) {
 
 
 
-function generateOrder(cid,user) {
-  console.log(cid);
-  console.log('USUARIO'+ " "+user);
-  socket.emit("generateOrder", cid,user)
-}
 
-socket.on("orderGenerated", (result) => {
-  if (result.success) {
-    alert("Orden generada exitosamente");
-    location.reload();
-  } else {
-    console.log("resultado"+ result.success);
-    alert("Error al generar la orden");
+async function generateOrder(cid, user) {
+  try {
+    const response = await fetch(`/api/carts/${cid}/purchase`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ user }),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      // se redirige  al usuario a la URL de la sesión de Stripe
+      window.location.href = data.sessionUrl;
+    } else {
+      // si la solicitud no es exitosa
+      console.error('Error al generar la orden');
+    }
+  } catch (error) {
+    console.error('Error al generar la orden:', error);
   }
-});
+};
+
 

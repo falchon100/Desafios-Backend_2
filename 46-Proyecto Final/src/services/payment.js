@@ -10,7 +10,7 @@ export default class PaymentService{
 
     
     createPaymentIntent = async (data)=>{
-        const paymentIntent = this.stripe.paymentIntents.create(data)
+        const paymentIntent =  await this.stripe.paymentIntents.create(data)
 
         return paymentIntent
     }

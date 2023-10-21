@@ -3,12 +3,16 @@ import ProductDao from "../DAO/ProductDao.js";
 import TicketDao from "../DAO/TicketDao.js";
 import crypto from 'node:crypto'
 import PaymentService from "../services/payment.js";
+import config from "../config/config.js";
 
 const paymentService = new PaymentService;
 const productsDao= new ProductDao;
 const cartDao = new CartsDao;
 const ticketDao = new TicketDao;
 //GETS
+
+
+
 export const getCarts_Ctrl = async (req, res) => {
     res.send(await cartDao.readCarts());
  }
@@ -51,6 +55,64 @@ export const generateOrder = async (req, res) => {
     } else {
       // Si la cantidad solicitada es menor o igual al stock del producto, lo agregamos a productsToProcess
       productsToProcess.push(producto);
+    }
+  }
+
+  console.log("productsToProcess", productsToProcess);
+  console.log("productsNotProcessed", productsNotProcessed);
+
+    // Crear el ticket si hay productos para procesar
+    if (productsToProcess.length > 0) {
+      const session = await paymentService.stripe.checkout.sessions.create({
+        payment_method_types: ['card'],
+        mode:"payment",
+        line_items:productsToProcess.map(item=>({
+          price_data: {
+            currency:  'usd',
+            product_data:{
+              name:item.products.title,
+              description:item.products.description
+            },
+            unit_amount:item.products.price *100,
+          },
+          quantity: item.quantity,
+        })),
+        payment_intent_data: {
+
+        },
+        success_url:`http://localhost:${config.port}/api/carts/purchase/success`,
+        cancel_url:`http://localhost:${config.port}/api/carts/purchase/cancel`
+      });
+      res.json({ sessionUrl: session.url });
+    }
+
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'Error al generar la compra' });
+  }
+}
+
+export const orderSuccess_Ctrl = async(req,res)=>{
+  
+  const cid = req.session.cart;
+  const cart = await cartDao.getCartsById(cid);
+  const Cart = cart[0].carts;
+
+  const productsToProcess = [];
+  const productsNotProcessed = [];
+
+
+  for (const producto of Cart) {
+    const product = await productsDao.getProductById(producto.products._id); //me traigo el producto con el id del carrito seleccionado
+    if (!product) {
+      // Si el producto no existe en la base de datos, lo agregamos a productsNotProcessed
+      productsNotProcessed.push(producto);
+    } else if (producto.quantity > product.stock) {
+      // Si la cantidad solicitada es mayor que el stock del producto, lo agregamos a productsNotProcessed
+      productsNotProcessed.push(producto);
+    } else {
+      // Si la cantidad solicitada es menor o igual al stock del producto, lo agregamos a productsToProcess
+      productsToProcess.push(producto);
     product.stock-=producto.quantity 
     product.save()
     await cartDao.deleteProductToCart(cid,producto.products._id)
@@ -58,30 +120,30 @@ export const generateOrder = async (req, res) => {
     }
   }
 
-  console.log("productsToProcess", productsToProcess);
-  console.log("productsNotProcessed", productsNotProcessed);
-
     // Calcular el total de la compra
     const totalSum = productsToProcess.reduce((accumulator, currentValue) => {
       return accumulator + currentValue.products.price * currentValue.quantity;
     }, 0);
 
-    // Crear el ticket si hay productos para procesar
     if (productsToProcess.length > 0) {
       const ticketData = {
         code: crypto.randomUUID(),
         purchase_datetime: new Date().toString(),
         amount: totalSum,
-        purchaser: req.body.user//email del usuario
+        purchaser: req.session.user//email del usuario
       };
       await ticketDao.createTicket(ticketData);
     }
-    res.status(200).json({ status: 'Compra generada con éxito' });
-  } catch (error) {
-   /*  res.status(500).json({ error: 'Error al generar la compra' }); */
-   console.log(error);
-  }
-};
+    let datos = JSON.parse(JSON.stringify(productsToProcess));
+  res.render('success',{user:req.session.user,totalSum,datos})
+}
+
+export const cancel_ctrl = async(req,res)=>{
+  const user = req.session.user;
+
+  res.render('cancel',{user})
+}
+
 
 //////////////////////////////////////////////////////////
 

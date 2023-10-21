@@ -1,11 +1,13 @@
 import { Router } from "express";
 import { 
+  cancel_ctrl,
   deleteCartsProd_Ctrl,
   deleteCarts_Ctrl,
   generateOrder,
   getCartsId_Ctrl,
   getCarts_Ctrl,
   getResetcart,
+  orderSuccess_Ctrl,
   postCartsProd_Ctrl,
   postCarts_Ctrl,
   putCartsProd_Ctrl,
@@ -16,12 +18,8 @@ const cartsRouter = Router();
 export default cartsRouter;
 //GETS/* getCartsId_Ctrl */
 cartsRouter.get("/", getCarts_Ctrl);
-cartsRouter.get("/success",(req,res)=>{
-  res.send('success')
-})
-cartsRouter.get("/cancel",(req,res)=>{
-  res.send('cancel')
-})
+cartsRouter.get("/purchase/success",orderSuccess_Ctrl)
+cartsRouter.get("/purchase/cancel",cancel_ctrl)
 cartsRouter.get("/:cid",getCartsId_Ctrl);
 //POST
 cartsRouter.post("/",postCarts_Ctrl);
