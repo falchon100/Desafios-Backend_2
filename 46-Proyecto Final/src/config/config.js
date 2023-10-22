@@ -16,5 +16,5 @@ export default {
     JWT_SECRET :process.env.JWT_SECRET,
     KEY_PRIVATE_STRIPE : process.env.KEY_PRIVATE_STRIPE,
     KEY_PUBLIC_STRIPE : process.env.KEY_PUBLIC_STRIPE,
-    DOMAIN :process.env.DOMAIN
+    DOMAIN : process.env.DOMAIN
 }

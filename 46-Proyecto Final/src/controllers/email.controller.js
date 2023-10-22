@@ -1,7 +1,9 @@
 import UserDao from "../DAO/UserDao.js";
+import config from "../config/config.js";
 import { sendMail } from "../services/email.js";
 import { generateEmailToken } from "../utils/jwt.js";
 import { createHash, isValidPassword } from "../utils/utils.js";
+
 
 
 const userDao = new UserDao(); //llamo la instancia de userDao
@@ -34,9 +36,9 @@ export const sendEmail = async(req,res)=>{
     html:`<div>
     <h1>Has solicitado un cambio de contraseña</h1>
     <p>si usted necesita cambiar el password clickee el siguiente link:</p>
-    <a href="http://localhost:${process.env.port}/api/email/password?token=${emailToken}">Nueva Contraseña</a>
+    <a href="${config.DOMAIN}${process.env.port}/api/email/password?token=${emailToken}">Nueva Contraseña</a>
     </div>`
-
+    
   }
 let result = await sendMail(options)
   console.log(result);

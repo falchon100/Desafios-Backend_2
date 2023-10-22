@@ -3,9 +3,10 @@ import supertest from "supertest";
 import { faker } from '@faker-js/faker';
 import session  from 'supertest-session';
 import app from '../app.js'
+import config from "../src/config/config.js";
 
 const expect = chai.expect;
-const requester = supertest(`http://localhost:${process.env.port}`);
+const requester = supertest(`${config.DOMAIN}${process.env.port}`);
 const testSession = session(app); 
 
 let prodID = "";

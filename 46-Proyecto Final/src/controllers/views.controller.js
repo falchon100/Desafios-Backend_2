@@ -2,6 +2,7 @@
 import CartsDao from "../DAO/CartDao.js";
 import UserDao from "../DAO/UserDao.js";
 import { productModel } from "../DAO/model/products.model.js";
+import config from "../config/config.js";
 
 const cartDao = new CartsDao();
 const userDao = new UserDao()
@@ -58,8 +59,8 @@ export const product_Ctrl =  async (req, res) => {
     page: result.page,
     hasPrevPage: result.hasPrevPage, 
     hasNextPage: result.hasNextPage, 
-    prevLink:result.prevLink = result.hasPrevPage?`http://localhost:${process.env.port}/products?page=${result.prevPage}&limit=${limit}`:'', 
-    nextLink:result.nextLink = result.hasNextPage?`http://localhost:${process.env.port}/products?page=${result.nextPage}&limit=${limit}`:''
+    prevLink:result.prevLink = result.hasPrevPage?`${config.docs}${process.env.port}/products?page=${result.prevPage}&limit=${limit}`:'', 
+    nextLink:result.nextLink = result.hasNextPage?`${config.docs}${process.env.port}/products?page=${result.nextPage}&limit=${limit}`:''
   }
  
   // SI LA PAGINA ES MAYOR A LAS PAGINAS QUE TENGO EN DATA ENVIO ERROR  SINO RENDERIZO LA DATA
