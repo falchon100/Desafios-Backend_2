@@ -32,7 +32,7 @@ app.use(addLogger)
 app.use(cors())
 
 const cartDao = new CartsDao();
-const server = app.listen(PORT, () => logger.info("creando servidor en http://localhost:"+PORT));
+const server = app.listen(PORT, () => logger.info(`Servidor escuchando puerto ${server.address().port}`));
 // io sera el servidor para trabajar con socket
 const io = new Server(server);
 app.use(express.urlencoded({ extended: true }));
