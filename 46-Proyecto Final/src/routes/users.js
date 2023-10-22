@@ -14,7 +14,7 @@ userRouter.post("/:uid/documents", uploader.any(),updateCtrl);
 
 userRouter.get('/',getUsers)
 
-userRouter.delete('/',deleteInactive)
+userRouter.delete('/',requireAuthAdmin,deleteInactive)
 
 userRouter.get('/setusers',requireAuthAdmin,setUsers)
 
