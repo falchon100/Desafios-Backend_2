@@ -117,7 +117,7 @@ io.on("connection", async (socket) => {
     );
   });
 
-  socket.on("generateOrder", async (cid,user) => {
+/*   socket.on("generateOrder", async (cid,user) => {
     try {
       const response = await fetch(`http://localhost:${process.env.port}/api/carts/${cid}/purchase`, {
         method: 'POST',
@@ -138,7 +138,7 @@ io.on("connection", async (socket) => {
       logger.error(error);
       socket.emit("orderGenerated", { success: false });
     }
-  });
+  }); */
 
   socket.on("deleteProduct", async ({ productId, user }) => {
     try {
